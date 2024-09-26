@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:TimesTable.Mobile.ViewModels"
+             x:Class="TimesTable.Mobile.Views.GamePage"
+             x:DataType="vm:GameViewModel">
+
+
+    <ScrollView HorizontalOptions="Center">
+        <Grid>
+            <VerticalStackLayout Padding="24, 8, 24, 8"
+                                 HorizontalOptions="Center" VerticalOptions="Center"
+                                 IsVisible="{Binding ShowSetupScreen}">
+
+                <Label Text="Merhaba Davut!" FontSize="36" FontAttributes="Bold" HorizontalOptions="Center" />
+
+                <Label Text="Hangi rakamları çalışmak istersin?" FontSize="17" Margin="0, 12, 0, 8"
+                       HorizontalOptions="Center" />
+
+                <Grid ColumnDefinitions="45, 45, 45, 45, 45, 45, 45, 45"
+                      RowDefinitions="50, 50" HorizontalOptions="Center">
+
+                    <Switch Grid.Row="0" Grid.Column="0" VerticalOptions="Center"
+                            IsToggled="{Binding TableTwo, Mode=TwoWay}" />
+                    <Label Grid.Row="0" Grid.Column="1" Text="2'ler" VerticalOptions="Center" />
+                    <Switch Grid.Row="0" Grid.Column="2" VerticalOptions="Center"
+                            IsToggled="{Binding TableThree, Mode=TwoWay}" />
+                    <Label Grid.Row="0" Grid.Column="3" Text="3'ler" VerticalOptions="Center" />
+                    <Switch Grid.Row="0" Grid.Column="4" VerticalOptions="Center"
+                            IsToggled="{Binding TableFour, Mode=TwoWay}" />
+                    <Label Grid.Row="0" Grid.Column="5" Text="4'ler" VerticalOptions="Center" />
+                    <Switch Grid.Row="0" Grid.Column="6" VerticalOptions="Center"
+                            IsToggled="{Binding TableFive, Mode=TwoWay}" />
+                    <Label Grid.Row="0" Grid.Column="7" Text="5'ler" VerticalOptions="Center" />
+
+                    <Switch Grid.Row="1" Grid.Column="0" VerticalOptions="Center"
+                            IsToggled="{Binding TableSix, Mode=TwoWay}" />
+                    <Label Grid.Row="1" Grid.Column="1" Text="6'lar" VerticalOptions="Center" />
+                    <Switch Grid.Row="1" Grid.Column="2" VerticalOptions="Center"
+                            IsToggled="{Binding TableSeven, Mode=TwoWay}" />
+                    <Label Grid.Row="1" Grid.Column="3" Text="7'ler" VerticalOptions="Center" />
+                    <Switch Grid.Row="1" Grid.Column="4" VerticalOptions="Center"
+                            IsToggled="{Binding TableEight, Mode=TwoWay}" />
+                    <Label Grid.Row="1" Grid.Column="5" Text="8'ler" VerticalOptions="Center" />
+                    <Switch Grid.Row="1" Grid.Column="6" VerticalOptions="Center"
+                            IsToggled="{Binding TableNine, Mode=TwoWay}" />
+                    <Label Grid.Row="1" Grid.Column="7" Text="9'lar" VerticalOptions="Center" />
+                </Grid>
+
+                <Button Text="Hepsini Aç/Kapat" Command="{Binding ToggleTablesCommand}" Margin="0, 6, 0, 0"
+                        WidthRequest="170" />
+
+                <Label Text="Zorluk Seviyesi" FontSize="17" Margin="0, 12, 0, 0" HorizontalOptions="Center" />
+                <Picker Title="Her soruyu cevaplamak için ne kadar süre verilsin?" HorizontalTextAlignment="Center"
+                        ItemsSource="{Binding DifficultyLevels}"
+                        SelectedItem="{Binding SelectedDifficultyLevel, Mode=TwoWay}" />
+
+                <Label Text="Tekrar Sayısı" FontSize="17" Margin="0, 12, 0, 0" HorizontalOptions="Center" />
+                <Label Text="{Binding RepeatCount, Mode=OneWay}" FontSize="24" HorizontalOptions="Center" />
+                <Stepper Minimum="1" Maximum="10" Increment="1" Value="{Binding RepeatCount, Mode=TwoWay}"
+                         HorizontalOptions="Center" />
+
+                <Button Text="Çalışmayı Başlat" Command="{Binding StartGameCommand}" Margin="0, 12, 0, 0"
+                        WidthRequest="170" />
+
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Padding="24, 8, 24, 8"
+                                 HorizontalOptions="Center"
+                                 Spacing="8"
+                                 IsVisible="{Binding IsGameRunning, Mode=TwoWay}">
+                
+                <HorizontalStackLayout HorizontalOptions="Center">
+                    <Label Text="Soru: "/>
+                    <Label Text="{Binding CurrentQuestionNumber}"/>
+                    <Label Text=" / "/>
+                    <Label Text="{Binding TotalQuestions}"/>
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout HorizontalOptions="Center">
+                    <Label Text="{Binding CurrentQuestionNumber1}" FontSize="48"/>
+                    <Label Text=" x " FontSize="48"/>
+                    <Label Text="{Binding CurrentQuestionNumber2}" FontSize="48"/>
+                    <Label Text=" = ?" FontSize="48"/>
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout HorizontalOptions="Center">
+                    <Entry Text="{Binding CurrentResponse, Mode=TwoWay}" 
+                           Placeholder="Cevap"
+                           MaxLength="2" 
+                           ClearButtonVisibility="WhileEditing" 
+                           Keyboard="Numeric" 
+                           IsSpellCheckEnabled="False"
+                           IsTextPredictionEnabled="False"
+                           FontSize="24"
+                           HorizontalTextAlignment="Center"
+                           />
+                </HorizontalStackLayout>
+                
+                <ProgressBar Progress="{Binding CurrentProgressValue, Mode=TwoWay}"/>
+
+                <Button Text="Cevapla" />
+                <Button Text="Soruyu Atla" BackgroundColor="OrangeRed" TextColor="Black"/>
+                <Button Text="Çalışmayı Sonlandır" BackgroundColor="Red" TextColor="White"/>
+
+            </VerticalStackLayout>
+
+        </Grid>
+
+    </ScrollView>
+</ContentPage>

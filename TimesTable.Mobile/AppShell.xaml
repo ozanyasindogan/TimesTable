@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+	x:Class="TimesTable.Mobile.AppShell"
+	xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:views="clr-namespace:TimesTable.Mobile.Views"
+	xmlns:local="clr-namespace:TimesTable.Mobile">
+
+	<TabBar>
+		<ShellContent
+			Title="Ana Sayfa"
+			Icon="iconblank.png"
+			ContentTemplate="{DataTemplate views:MainPage}" />
+		<ShellContent
+			Title="Oyun"
+			Icon="iconblank.png"
+			ContentTemplate="{DataTemplate views:GamePage}" />
+		<ShellContent
+			Title="Sonuçlar"
+			Icon="iconblank.png"
+			ContentTemplate="{DataTemplate views:ResultsPage}" />
+	</TabBar>
+</Shell>
